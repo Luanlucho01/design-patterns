@@ -1,4 +1,4 @@
-package br.pucpr.user;
+package br.pucpr.table;
 
 public enum Theme {
   LIGHT("-"),
