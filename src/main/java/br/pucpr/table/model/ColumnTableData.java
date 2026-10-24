@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class ColumnTableData<T> implements TableData {
+public class ColumnTableData<T> extends AbstractObservableTableData {
   private final List<ColumnData<? super T>> columns;
   private final List<T> data;
 
@@ -18,6 +18,27 @@ public class ColumnTableData<T> implements TableData {
   @SafeVarargs
   public ColumnTableData(Collection<? extends T> data, ColumnData<? super T>... columns) {
     this(data, Arrays.asList(columns));
+  }
+
+  public void add(T row) {
+    data.add(row);
+    fireDataChanged();
+  }
+
+  public void set(int row, T value) {
+    data.set(row, value);
+    fireDataChanged();
+  }
+
+  public T remove(int row) {
+    final var removed = data.remove(row);
+    fireDataChanged();
+    return removed;
+  }
+
+  public void clear() {
+    data.clear();
+    fireDataChanged();
   }
 
   @Override

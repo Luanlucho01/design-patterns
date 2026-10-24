@@ -1,7 +1,7 @@
 package br.pucpr.table.model;
 
 /** Decorator que expõe apenas as linhas da página atual de qualquer {@link TableData}. */
-public final class PagedTableData implements TableData {
+public final class PagedTableData extends AbstractObservableTableData {
   private final TableData data;
   private final int pageSize;
   private int page;
@@ -16,6 +16,9 @@ public final class PagedTableData implements TableData {
     this.data = data;
     this.pageSize = pageSize;
     setPage(page);
+    if (data instanceof ObservableTableData observable) {
+      observable.addListener(source -> onSourceChanged());
+    }
   }
 
   public PagedTableData(TableData data, int pageSize) {
@@ -35,7 +38,15 @@ public final class PagedTableData implements TableData {
     if (page < 1 || page > pageCount()) {
       throw new IllegalArgumentException("Page must be between 1 and " + pageCount());
     }
-    this.page = page;
+    if (this.page != page) {
+      this.page = page;
+      fireDataChanged();
+    }
+  }
+
+  private void onSourceChanged() {
+    page = Math.min(page, pageCount());
+    fireDataChanged();
   }
 
   public int pageCount() {

@@ -9,6 +9,7 @@ import br.pucpr.planet.Planet;
 import br.pucpr.planet.PlanetaColumns;
 import br.pucpr.table.Table;
 import br.pucpr.table.TableBuilder;
+import br.pucpr.table.TableView;
 import br.pucpr.table.model.ColumnTableData;
 import br.pucpr.table.model.PagedTableData;
 import br.pucpr.user.CpfColumn;
@@ -98,5 +99,25 @@ public class Main {
         .paged(3, 2)
         .withData(new ColumnTableData<>(planetas, PlanetaColumns.values()))
         .print();
+
+    System.out.println();
+    System.out.println("USUARIOS OBSERVADOS");
+    System.out.println("-------------------");
+    final var observedUsers =
+        new ColumnTableData<User>(
+            usuarios, new IdColumn(), new NameColumn(), new CpfColumn(), new EmailColumn());
+    final var observedPage = new PagedTableData(observedUsers, 3);
+    // Outro componente interessado na mudança: um indicador de paginação
+    observedPage.addListener(
+        source ->
+            System.out.printf(
+                "%n[Mudança] %d usuários, página %d de %d%n",
+                observedUsers.rowCount(), observedPage.getPage(), observedPage.pageCount()));
+    final var view = new TableView(new Table(observedPage, LIGHT));
+    view.render();
+
+    observedUsers.add(new User(107L, "Fernanda Lima", "fernanda@email.com", "99988877766"));
+    observedPage.next();
+    observedUsers.remove(6);
   }
 }
