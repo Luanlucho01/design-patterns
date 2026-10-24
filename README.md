@@ -1,26 +1,31 @@
-# Exemplo Prático: Análise de Código e Qualidade de Software
+# Atividade
 
-Este repositório contém um exemplo didático em Java desenvolvido para a disciplina de **Design Patterns**.
-
-O objetivo deste projeto é servir de base para o estudo prático de manutenibilidade, legibilidade e boas práticas de arquitetura e código.
+Que tal refletirmos um pouco sobre o que acontece com esse código quando novos requisitos são adicionados?
 
 ---
 
 ## 🎯 Objetivo da Atividade
 
-A classe `UsuarioPrinter` implementa uma funcionalidade completa e operacional: ela recebe uma lista de usuários e renderiza uma tabela formatada no console.
+Altere o código da classe PlanetasPrinter que os planetas também possam ser impressos.
+Tente fazer isso com o menor esforço possível.
 
-Apesar de o programa funcionar perfeitamente do ponto de vista funcional, a estrutura interna do código contém diversas fragilidades de design que impactam diretamente a sua evolução, legibilidade e facilidade de testes.
+Verifique a classe [br.pucpr.Planet](https://github.com/ViniGodoy/design-patterns/blob/aula-01-ex/src/main/java/br/pucpr/planet/Planet.java)
 
-Sua missão como aluno é analisar o código-fonte, identificar os pontos de melhoria estruturais e aplicar as refatorações necessárias para elevar a qualidade do projeto sem alterar a saída gerada no console.
+O formato de impressão da tabela (bordas, temas) deve ser exatamente igual ao da tabela de usuários.
 
----
+Quanto aos dados:
+1. Devem ser impressas as seguintes colunas "Nome", "Diâmetro", "Dist. sol (km)", "Dist. sol (ua)", e "Tipo". Observação uma unidade astronomica (UA) é equivalente à distância da Terra ao Sol.
+2. O diametro do planeta deve ser impresso com 1 casa decimal e separadores de milhar.
+3. A distância até o sol em km deve ser impressa em um número inteiro com separadores de milhar.  
+4. Já a distância em UA deve ser impressa com duas casas decimais com separadores de milhar.
+5. O tipo deve ser impresso como "Rochoso", "Gososo", "Gelado", "Anão"
 
-## 📋 Proposta de Exercício
+## 📋 Reflexão final
 
-1. **Análise Crítica:** Esquadrinhe o método `print` e identifique as violações de boas práticas de programação e orientação a objetos.
-2. **Mapeamento:** Liste quais sintomas de código deteriorado (*Code Smells*) estão presentes e quais princípios de design foram violados.
-3. **Refatoração:** Aplique técnicas de refatoração para transformar o código em uma solução limpa, bem estruturada e fácil de manter.
+Ao final da implementação reflita:
+
+1. Sua solução ficou com muito código duplicado?
+2. O que aconteceria se uma terceira classe tivesse que ser adicionada?
 
 ---
 
@@ -31,6 +36,6 @@ Sua missão como aluno é analisar o código-fonte, identificar os pontos de mel
 ### Como Executar
 
 ```bash
-javac UsuarioPrinter.java
-java UsuarioPrinter
+javac PlanetasPrinter.java
+java PlanetasPrinter
 ```

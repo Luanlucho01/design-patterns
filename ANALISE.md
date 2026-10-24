@@ -60,3 +60,13 @@ Estrutura resultante:
 
 Benefícios: responsabilidades separadas, nomes alinhados à intenção, formatação testável de forma isolada e correção do laço que reimprimia a tabela a cada linha.
 
+
+---
+
+# Atividade — Impressão de Planetas
+
+**1. Ficou com muito código duplicado?**
+Sim. Borda, cabeçalho, laço das linhas, `alignRight` e `formatName` foram copiados do `UsersPrinter`. Só mudam as colunas e a formatação dos campos.
+
+**2. E se uma terceira classe fosse adicionada?**
+Seria mais uma cópia inteira. Qualquer mudança no layout da tabela teria que ser repetida em cada printer. A solução é separar a tabela genérica (bordas, tema, alinhamento) da definição das colunas de cada tipo.
