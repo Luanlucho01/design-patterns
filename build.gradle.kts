@@ -6,6 +6,7 @@ plugins {
     application
     id("com.github.spotbugs") version "6.5.10"
     id("com.diffplug.spotless") version "8.9.0"
+    kotlin("jvm")
 }
 
 group = "br.com.pucpr"
@@ -30,6 +31,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(kotlin("test"))
 }
 
 tasks.test {

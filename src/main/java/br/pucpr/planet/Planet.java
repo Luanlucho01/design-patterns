@@ -1,6 +1,12 @@
 package br.pucpr.planet;
 
-public record Planet(String name, double diameterKm, long sunDistanceKm, PlanetType type) {
+import br.pucpr.table.reflection.Column;
+
+public record Planet(
+    @Column(header = "      Planeta      ") String name,
+    @Column(header = "    Diametro    ") double diameterKm,
+    long sunDistanceKm,
+    @Column PlanetType type) {
   public static final long EARTH_SUN_DISTANCE_KM = 149_600_000L;
 
   public static double kmToAu(long km) {

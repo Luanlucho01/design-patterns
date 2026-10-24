@@ -9,7 +9,8 @@ public class ColumnTableData<T> implements TableData {
   private final List<ColumnData<? super T>> columns;
   private final List<T> data;
 
-  public ColumnTableData(Collection<? extends T> data, Collection<ColumnData<? super T>> columns) {
+  public ColumnTableData(
+      Collection<? extends T> data, Collection<? extends ColumnData<? super T>> columns) {
     this.columns = new ArrayList<>(columns);
     this.data = new ArrayList<>(data);
   }

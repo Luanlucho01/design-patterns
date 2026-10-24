@@ -6,18 +6,22 @@ import static br.pucpr.planet.PlanetType.ICE;
 import static br.pucpr.table.Theme.LIGHT;
 
 import br.pucpr.planet.Planet;
-import br.pucpr.planet.PlanetsTableData;
+import br.pucpr.planet.PlanetaColumns;
 import br.pucpr.table.Table;
+import br.pucpr.table.TableBuilder;
 import br.pucpr.table.model.ColumnTableData;
+import br.pucpr.table.model.PagedTableData;
 import br.pucpr.user.CpfColumn;
 import br.pucpr.user.EmailColumn;
 import br.pucpr.user.IdColumn;
 import br.pucpr.user.NameColumn;
 import br.pucpr.user.User;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args)
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     final var usuarios = new ArrayList<User>();
     usuarios.add(
         new User(101L, "Carlos Eduardo de Souza", "carlos.souza@email.com", "12345678901"));
@@ -51,6 +55,48 @@ public class Main {
     System.out.println();
     System.out.println("IMPRIMINDO PLANETAS");
     System.out.println("-------------------");
-    new Table(new PlanetsTableData(planetas)).print();
+    new Table(new ColumnTableData<>(planetas, PlanetaColumns.values())).print();
+
+    System.out.println("PLANETAS REFLETIDOS");
+    System.out.println("-------------------");
+
+    new TableBuilder()
+        .light()
+        .rightAligned()
+        .withData(
+            planetas,
+            c ->
+                c.add(PlanetaColumns.values())
+                    .add(
+                        "Distance (au)",
+                        p -> "%,11.2f".formatted(Planet.kmToAu(p.sunDistanceKm()))))
+        .print();
+
+    System.out.println();
+    System.out.println("USUARIOS PAGINADOS");
+    System.out.println("------------------");
+    final var pagedUsers =
+        new PagedTableData(
+            new ColumnTableData<User>(
+                usuarios, new IdColumn(), new NameColumn(), new CpfColumn(), new EmailColumn()),
+            4);
+    final var usersTable = new Table(pagedUsers, LIGHT);
+    while (true) {
+      System.out.printf("Página %d de %d%n", pagedUsers.getPage(), pagedUsers.pageCount());
+      usersTable.print();
+      if (!pagedUsers.hasNext()) {
+        break;
+      }
+      pagedUsers.next();
+    }
+
+    System.out.println();
+    System.out.println("PLANETAS PAGINADOS (BUILDER, PAGINA 2)");
+    System.out.println("--------------------------------------");
+    new TableBuilder()
+        .dark()
+        .paged(3, 2)
+        .withData(new ColumnTableData<>(planetas, PlanetaColumns.values()))
+        .print();
   }
 }

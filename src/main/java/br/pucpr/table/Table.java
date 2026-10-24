@@ -1,6 +1,7 @@
 package br.pucpr.table;
 
 import br.pucpr.table.model.TableData;
+import br.pucpr.table.reflection.Column;
 import java.util.ArrayList;
 
 public final class Table {
@@ -44,6 +45,7 @@ public final class Table {
     this.theme = theme;
   }
 
+  @Column(header = "Alinhamento")
   public boolean isAlignRight() {
     return alignRight;
   }

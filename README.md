@@ -1,13 +1,12 @@
 # Atividade
 
-Vamos separar nossas classes em diferentes responsabilidades através do padrão de projetos Adapter.
+Antes de começar, analise como foi implementado o exemplo de reflexão na classe Main
+Veja como foi criada e utilizada a anotação @Column
 ---
 
 ## 🎯 Objetivo da Atividade
 
-1. Crie a interface br.pucpr.table.model.TableData para representar os dados de uma tabela (TableData)
-2. Refatore as classes UsersPrinter e PlanetasPrinter para ter uma única classe Table
-3. A largura da coluna será dada pela largura do seu cabeçalho.
+Inspecione a classe do usuário ou planeta e gere o modelo automaticamente.
 
 ---
 

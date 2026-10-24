@@ -1,3 +1,5 @@
 package br.pucpr.user;
 
-public record User(Long id, String name, String email, String cpf) {}
+import br.pucpr.table.reflection.Column;
+
+public record User(Long id, @Column(header = "Nome") String name, String email, String cpf) {}
